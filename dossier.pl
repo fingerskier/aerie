@@ -1,8 +1,12 @@
+use v6;
+=begin pod
+=head1 NAME
 # dossier library upsert function
 # the input is a dot-delimited list of names (the path) and some text (data)
 # the final thing in the list is either a name or line-number
 # the next-to-last thing in the list is the file-name (default extension is .dat)
 # the other stuff in the list is the path
+=end pod
 
 sub MAIN($path, $data = "") {
 	my @path = $path.split('.');
