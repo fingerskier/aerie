@@ -29,6 +29,6 @@ Desired syntax:
 ```
 const aerie = require('aerie')
 
-aerie\`Pointless text _PUNC${some_val} and _END\`
+aerie`Pointless text _PUNC${some_val} and _END`
 ```
 ...or something like that.
