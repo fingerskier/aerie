@@ -3,7 +3,8 @@
 An ultra-simple utility to handle nested JSON files.
 
 Current usage:
-Setting
+
+####Setting
 ```
 const aerie = require('aerie')
 
@@ -11,7 +12,7 @@ aerie('some.dir.file.item', 'value')
 ```
 ...which would result in ./some/dir/file.json being parsed, and having it's "item" property assigned "value".
 
-Getting
+####Getting
 ```
 const aerie = require('aerie')
 
@@ -23,12 +24,18 @@ There is a CLI version of this included as `cli.js`
 
 
 ##TODO
-The ultimate desire is to incorporate these calls into template literal tags to create a JSON DSL.  For now it roughly meets my needs as is.
+The ultimate desire is to incorporate these calls into template literal tags to create a JSON DSL.
 
 Desired syntax:
 ```
-const aerie = require('aerie')
+aerie.transform`command${data}operation${value}`()
 
-aerie\`Pointless text _PUNC${some_val} and _END\`
+aerie.transform`command${data}command${data}`.data()
 ```
 ...or something like that.
+
+- A proxy on aerie could mutate the parser based on context, if desired.
+- The template tag could return a value, object, or function as needed.
+
+**Why?**
+

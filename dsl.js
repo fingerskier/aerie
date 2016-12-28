@@ -2,6 +2,10 @@
 const file_system = require('fs')
 const touch = require('touch')
 
+/* TODO
+	the template literal tag should return the proxy object which corresponds with a dynamic data-handler
+*/
+
 module.exports = (strings, ...keys)=>{
 	let result = ''
 
@@ -19,15 +23,37 @@ module.exports = (strings, ...keys)=>{
 }
 
 // adding capabilities is as "simple" as adding a function to this object
-DB = {
-	get(given_path){
-		return upsert(given_path)
-	}
-	,
-	set(given_path, data){
-		return upsert(given_path, data)
+const DB = function(){
+	
+	return {
+		get(given_path){
+			return upsert(given_path)
+		}
+		,
+		set(given_path, data){
+			return upsert(given_path, data)
+		}
 	}
 }
+
+const Handler = {
+	get(target, property, receiver){
+		console.log(`getting ${property} from ${target}`)
+
+		return target[property]
+	}
+	,
+	set(target, property, value, receiver){
+		// setting a property's value
+
+		target[property] = value	// default behavior
+
+		return true
+	}
+}
+
+const Schema = new Proxy(DB, Handler)
+
 
 upsert = (given_path, data)=>{
 	const path = given_path.split('.')
@@ -62,7 +88,6 @@ upsert = (given_path, data)=>{
 
 			return true
 		} else {
-console.log(doc[item])
 			return doc[item]
 		}
 	})
