@@ -39,3 +39,14 @@ module.exports = (given_path, data='')=>{
 		}
 	})
 }
+
+exports.path = (given_path)=>{
+	const path = given_path.split('.')
+
+	const item = path.pop()
+	const filename = path.pop() + '.json'
+
+	const directory = path.join('\\')
+
+	return `.\\${directory}\\${filename}`
+}
