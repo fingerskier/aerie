@@ -1,4 +1,6 @@
+let aerie = require('./aerie')
 let DB = {}
+let fs = require('fs')
 
 module.exports = new Proxy(DB, {
 	has(target, prop) {
@@ -6,17 +8,17 @@ module.exports = new Proxy(DB, {
 	}
 	,
 	get(target, property, receiver) {
-		console.log(property)
+		if (!target[property]) {
+			target[property] = aerie(property)
+		}
 
 		return target[property]
 	}
 	,
 	set(target, property, value, receiver) {
-		console.log(property)
-
 		target[property] = value	// default behavior
 
-		console.log(receiver)
+		aerie(property, value)
 
 		return true
 	}

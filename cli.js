@@ -1,5 +1,5 @@
 const data = process.argv[3]
-const db = require('./db')
+const db = require('./aerie')
 const this_path = process.argv[2]
 
 
