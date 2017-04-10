@@ -1,8 +1,8 @@
-#aerie
+# aerie
 
 An ultra-simple utility to handle nested JSON files.
 
-###Current usage:
+### Current usage:
 Setting
 ```
 const aerie = require('aerie')
@@ -22,7 +22,7 @@ aerie('some.dir.file.item')
 There is a CLI version of this included as `cli.js`
 
 
-###TODO
+### TODO
 I have two desires for add-ons:
 1) Template literal tags which form an extensible JSON DSL
 Desired syntax:
