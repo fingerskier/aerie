@@ -1,10 +1,8 @@
 const data = process.argv[3]
-const db = require('./db')
 const this_path = process.argv[2]
 
+const aerie = require('./aerie')
 
-if (data) {
-	db(this_path, data)
-} else {
-	db(this_path)
-}
+var result = aerie.data(this_path, data);
+
+console.log(result)
