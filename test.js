@@ -1,4 +1,4 @@
-const {get, set} = require('./tag')('./data')
+const {get, set} = require('./')('./data')
 
 
 async function main() {
@@ -14,7 +14,7 @@ async function main() {
   const testGlob = await get`flarn/*ey`
   console.log('test glob path', testGlob)
 
-  const testMap = testGlob.map(X=>X[1].value)
+  const testMap = testGlob.map(X=>X[1])
   console.log('test map of glob result', testMap)
 
   const testGlobTwo = await get`sch*/**`
@@ -26,16 +26,21 @@ async function main() {
 
 
   /**
-   / refers to a file-path
-   . refers to an object key in the given file
-   | refers to an array item at the given index
+    A set follows this pattern:
+      some/file/path.propery=value
+      If value is a function then that function gets called on the given property
    */
-  const path = 'flarn/ghibbet'
-  const key = 'flarn/ghibbet'
-  const val = 'amazing'
-  const cond = function(el) {return el}
-  
-  set`${path}.${key} to ${val} if ${cond}`
+  // when the
+  let testSetArrayProp = await set`fl*/*ey.1=2`
+  let postTestArrayProp = await get`fl*/*ey`
+  console.log('test set array prop', testSetArrayProp, postTestArrayProp)
+
+  testSetArrayProp = await set`fl*/*ey.1=3`
+  postTestArrayProp = await get`fl*/*ey`
+  console.log('test set array prop', testSetArrayProp, postTestArrayProp)
+
+  // set`sc*/*ib/*.active=1`
+  // get`sc*/*ib/*`
 }
 
 
