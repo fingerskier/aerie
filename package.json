@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/fingerskier/aerie/issues"
   },
-  "homepage": "https://github.com/fingerskier/aerie#readme"
+  "homepage": "https://github.com/fingerskier/aerie#readme",
+  "dependencies": {
+    "glob-promise": "^4.1.0"
+  }
 }

@@ -1,52 +1,27 @@
-module.exports = (given_path, data='')=>{
-	const file_system = require('fs')
-	const touch = require('touch')
+module.exports = function(root) {
+  return {
+    get: async function(strings, ...keys) {
+      const fs = require('fs').promises
+      const glob = require('glob-promise')
 
-	// valid data-path = direc.tory.file.line_num
-	// data files must be named *.json (but the .json doesn't go in the path)
-	const path = given_path.split('.')
+      let query = ''
+      for (let I in strings) {
+        const thisKey = keys[I]
+        const thisString = strings[I]
+        query += thisString? thisString: ''
+        query += thisKey? thisKey: ''
+      }
 
-	const item = path.pop()
-	const filename = path.pop() + '.json'
+      const path = `${root}/${query}.json`
+      const files = await glob(path)
 
-	const directory = path.join('\\')
-	const filepath = `.\\${directory}\\${filename}`
+      const result = files.map(F=>require(F))
 
-	file_system.readFile(filepath, (error, contents='')=>{
-		if (error){
-			if (error.errno = -4058) {
-				file_system.mkdirSync(directory)
-				touch(filepath)
-			} else {
-				throw error
-			}
-		}
+      return result
+    },
 
-		let doc = {}
-
-		if (contents.length) doc = JSON.parse(contents.toString())
-
-		if (data) {
-			doc[item] = data
-
-			file_system.writeFile(filepath, JSON.stringify(doc), (error)=>{
-				if (error) throw error
-			})
-
-			return true
-		} else {
-			return doc[item]
-		}
-	})
-}
-
-exports.path = (given_path)=>{
-	const path = given_path.split('.')
-
-	const item = path.pop()
-	const filename = path.pop() + '.json'
-
-	const directory = path.join('\\')
-
-	return `.\\${directory}\\${filename}`
+    set: async function(strings, ...keys) {
+      const fs = require('fs').promises
+    },
+  }
 }
