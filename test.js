@@ -1,5 +1,12 @@
-const {get, set} = require('./')('./data')
+const {get, put, update} = require('./')('./data')
 
+
+async function testPropChange(query, prop, newPropVal) {
+  await update`${query}.${prop}=${newPropVal}`
+
+  const postTestArrayProp = await get`${query}`
+  console.log('test prop set', query, prop, postTestArrayProp)
+}
 
 async function main() {
   /**
@@ -30,17 +37,25 @@ async function main() {
       some/file/path.propery=value
       If value is a function then that function gets called on the given property
    */
-  // when the
-  let testSetArrayProp = await set`fl*/*ey.1=2`
-  let postTestArrayProp = await get`fl*/*ey`
-  console.log('test set array prop', testSetArrayProp, postTestArrayProp)
+  await testPropChange('fl*/*ey', 1, 'flarn')
+  await testPropChange('sc*/*ib/*', 'active', 1)
+  await testPropChange('sc*/*ib/*', 'name', (val,path)=>path)
 
-  testSetArrayProp = await set`fl*/*ey.1=3`
-  postTestArrayProp = await get`fl*/*ey`
-  console.log('test set array prop', testSetArrayProp, postTestArrayProp)
+  await update`zap/zip.name=bobby`
+  await update`zap/zing/blah.name=huube` 
 
-  // set`sc*/*ib/*.active=1`
-  // get`sc*/*ib/*`
+  const newMember = {
+    name: 'Chung Smith',
+    id: '42',
+    weight: 246,
+  }
+  await put`member/42=${newMember}`
+
+  const boringMember = "Chuck"
+  await put`member/77=${boringMember}`
+
+  // non-existent property
+  await update`member/77.name=Chuck`
 }
 
 
