@@ -1,17 +1,25 @@
 # aerie
 
-An ultra-simple utility to handle nested JSON files.
+An ultra-simple utility server to handle nested JSON files.
 
 
 ## Gist
 
-Basically returns an array of JSON files in any path below the given root.
-The intention is that the returned array can be map/reduced into w/e needs be is.
+Data is stored in the `data` directory.
+GET data at `/data/...`.
+POST data at `/data/...`.
 
-Check out `test.js` for examples.
+
+## Examples
+
+GET `http://localhost:3000/data/flarn/ghibbet` will return the value of `./data/flarn/ghibbet.json`.
+
+GET `http://localhost:3000/data/flarn/1` a trailing integer with return the Nth element of that thing.
+
+POST `http://localhost:3000/data/flarn/schlesly` will write the Body data to `./data/flarn/schlesly.json`.
 
 
-## Usage
+## Dashboard
 
-First, these are `async` functions; so, utilize inside an `async()` or use `.then` & `.catch()`
-Next, these are template string tags ~ they act like function where the arguments are the stuff in a string.
+A rudimentary dashboard is available at `/dashboard`.
+There you can GET and POST to the server.
