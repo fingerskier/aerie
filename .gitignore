@@ -102,3 +102,4 @@ public
 .vscode/
 *.swp
 *.swo
+transactions.log
