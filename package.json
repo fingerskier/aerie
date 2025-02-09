@@ -1,9 +1,11 @@
 {
   "name": "aerie",
-  "version": "0.7.0",
-  "description": "Nested JSON handler",
+  "version": "0.9.0",
+  "description": "JSON database",
   "main": "index.js",
   "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
     "test": "npx nodemon --ignore data/ test.js"
   },
   "repository": {
@@ -13,6 +15,12 @@
   "keywords": [
     "JSON",
     "data",
+    "database",
+    "json database",
+    "json file",
+    "server",
+    "api",
+    "rest",
     "nested"
   ],
   "author": "fingerskier",
@@ -22,8 +30,11 @@
   },
   "homepage": "https://github.com/fingerskier/aerie#readme",
   "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "glob-promise": "^4.1.0",
     "mkdirp": "^1.0.4",
+    "morgan": "^1.10.0",
     "touch": "^3.1.0"
   }
 }

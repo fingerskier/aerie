@@ -1,0 +1,35 @@
+.data-display {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.filter-section {
+    margin: 10px 0;
+}
+
+#postForm {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#postData {
+    width: 100%;
+    min-height: 100px;
+    margin-top: 5px;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], textarea {
+    padding: 5px;
+} 

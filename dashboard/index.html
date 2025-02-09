@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aerie Dashboard</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>Aerie Dashboard</h1>
+  
+  <form id="dataForm">
+    <div>
+      <label for="dataPath">Data Path:</label>
+      <input type="text" id="dataPath" name="dataPath" required placeholder="/data/...">
+    </div>
+    
+    <div class="filter-section">
+      <input type="checkbox" id="enableFilter" name="enableFilter">
+      <label for="enableFilter">Enable Filter</label>
+      <input type="text" id="filterValue" name="filterValue" placeholder="Filter value">
+    </div>
+    
+    <button type="submit">Fetch Data</button>
+  </form>
+
+  <div id="dataDisplay" class="data-display"></div>
+
+  <form id="postForm">
+    <h2>Post Data</h2>
+    <div>
+      <label for="postPath">Data Path:</label>
+      <input type="text" id="postPath" name="postPath" required placeholder="flarn/ghibbet">
+    </div>
+    <div>
+      <label for="postData">Data:</label>
+      <textarea id="postData" name="postData" required placeholder="Enter JSON data"></textarea>
+    </div>
+    <button type="submit">Post Data</button>
+  </form>
+
+  <script src="index.js"></script>
+</body>
+</html>
