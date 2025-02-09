@@ -1,8 +1,14 @@
 {
+  "author": "fingerskier",
+  "description": "JSON database",
+  "files": [
+    "index.js",
+    "dashboard/**"
+  ],
+  "main": "index.js",
   "name": "aerie",
   "version": "0.9.1",
-  "description": "JSON database",
-  "main": "index.js",
+
   "scripts": {
     "dev": "node --watch index.js",
     "start": "node index.js",
@@ -23,7 +29,6 @@
     "rest",
     "nested"
   ],
-  "author": "fingerskier",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/fingerskier/aerie/issues"
