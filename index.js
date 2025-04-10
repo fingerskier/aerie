@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('dotenv').config()
+
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
@@ -15,7 +17,7 @@ const DATA_DIR = path.join(__dirname, 'data')
 const LOG_FILE = path.join(__dirname, 'transactions.log')
 
 // Serve static dashboard from dashboard/ folder
-app.use(express.static('dashboard'))
+app.use('/dashboard',express.static('dashboard'))
 
 // improved transaction logging
 function logTransaction(req, result, extra) {
@@ -191,21 +193,21 @@ app.get('/data/*', (req, res) => {
     fileName = parts[fileIndex]
     if (!fileName.endsWith('.json')) fileName += '.json'
   }
-
+  
   let subDirs = parts.slice(0, fileIndex)
   let leftover = parts.slice(fileIndex + 1)
-
+  
   // ensure directories exist
   let dirPath = path.join(DATA_DIR, ...subDirs)
   fs.mkdirSync(dirPath, { recursive: true })
-
+  
   let fullPath = path.join(dirPath, fileName)
-
+  
   // if the file doesn't exist, create it
   if (!fs.existsSync(fullPath)) {
     fs.writeFileSync(fullPath, '{}', 'utf8')
   }
-
+  
   let data
   try {
     let raw = fs.readFileSync(fullPath, 'utf8')
@@ -214,18 +216,19 @@ app.get('/data/*', (req, res) => {
     logTransaction(req, null, { error: 'unable to read or parse file', fullPath })
     return res.status(500).json({ error: 'Unable to read or parse JSON file' })
   }
-
+  
   let result = getValueByPath(data, leftover)
   let filtered = applyQueryFilters(result, req.query)
-
+  
   logTransaction(req, filtered, { fullPath, leftover })
-
+  
   if (filtered === undefined) {
     return res.status(404).json({ error: 'Path not found' })
   }
-
+  
   res.json(filtered)
 })
+
 
 // POST route for creating or updating data
 app.post('/data/*', (req, res) => {
@@ -274,6 +277,7 @@ app.post('/data/*', (req, res) => {
   logTransaction(req, data, { fullPath, leftover })
   res.json({ success: true, message: 'Data updated', filePath: fullPath })
 })
+
 
 let port = process.env.PORT || 3000
 app.listen(port, () => {

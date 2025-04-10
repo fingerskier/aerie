@@ -19,6 +19,11 @@ GET `http://localhost:3000/data/flarn/1` a trailing integer with return the Nth 
 POST `http://localhost:3000/data/flarn/schlesly` will write the Body data to `./data/flarn/schlesly.json`.
 
 
+## Queries
+
+Appending a query parameter applies that to query to the resultant data.
+
+
 ## Dashboard
 
 A rudimentary dashboard is available at `/dashboard`.
